@@ -9,23 +9,20 @@ namespace ImageQuantization
     class Prim
     {
 
-        struct Edge
+
+        public double CalculateEuclideanDistance(RGBPixel x, RGBPixel y)
         {
-            int from, to, w;
+            double distance = 0.0;
+            distance += Math.Abs(x.red - y.red) * Math.Abs(x.red - y.red);
+            distance += Math.Abs(x.green - y.green) * Math.Abs(x.green - y.green);
+            distance += Math.Abs(x.blue - y.blue) * Math.Abs(x.blue - y.blue);
+            return Math.Sqrt(distance);
+        }
 
-            
+        
 
-            Edge(int from, int to, int w) /*: from(from), to(to), W(w)*/ {
 
-                this.from = from;
-                this.to = to;
-                this.w = w;
-            }
-            //public bool operator <(in Edge e)
-            //{
-            //    return w > e.w;
-            //}
-        };
+
 
 
      }
