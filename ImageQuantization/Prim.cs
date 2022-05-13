@@ -15,12 +15,9 @@ namespace ImageQuantization
          - include selected node in MST
          - Relax adjecent edges tothe selected node
          */
-       
-
-
         int selectMinimumVertex(List<int> value ,List<bool> setMST, int numberOfVertex)
         {
-            int min = 1000000;
+            int min = 1000000000;
             int vertex = 0;
             for (int i = 0; i < numberOfVertex; i++)
             {
@@ -37,7 +34,7 @@ namespace ImageQuantization
         
         // Errors will be solved once graph is constructed
 
-        public double MST(int graph[V][V] , int V)
+        public S MST(int graph[V][V] , int V)
         {
             double minimumSpanningTreeCost = 0.0;
             int parent[] = new int[V]; // contains MST  
@@ -53,7 +50,7 @@ namespace ImageQuantization
             value[0] = 0;
             for (int i = 0; i < V - 1; i++)
             {
-                int u = selectMinimumVertex(value, setMST); //step1
+                int u = selectMinimumVertex(value, setMST, V); //step1
                 setMST[u] = true; // step2
 
                 for (int j = 0; j < V; j++)
@@ -62,12 +59,14 @@ namespace ImageQuantization
                     {
                         value[j] = graph[u][j];
                         parent[j] = u;
-                        minimumSpanningTreeCost += value[j];
+                        
 
                     }
+
                 }
+                
             }
-            return minimumSpanningTreeCost;
+            return minimumSpanningTreeCost; // loop on value list;
 
         }
 
