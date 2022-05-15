@@ -6,69 +6,84 @@ using System.Text;
 
 namespace ImageQuantization
 {
-    class Prim 
+    class Prim
     {
-        /*
-         Prim logic
-         - All nodes weights must be initialy infinity except source node
-         - Select node with minimum weight
-         - include selected node in MST
-         - Relax adjecent edges tothe selected node
-         */
-        int selectMinimumVertex(List<int> value ,List<bool> setMST, int numberOfVertex)
+        private readonly Graph graph;
+
+        public Prim(Graph graph)
         {
-            int min = 1000000000;
+            this.graph = graph;
+        }
+
+        /*
+         *  Prim logic
+         *  - All nodes weights must be initialy infinity except source node
+         *  - Select node with minimum weight
+         *  - include selected node in MST
+         *  - Relax adjecent edges tothe selected node
+         */
+
+        private int selectMinimumVertex(List<double> values, List<bool> setMST, int numberOfVertex)
+        {
+            double min = double.MaxValue;
             int vertex = 0;
+
             for (int i = 0; i < numberOfVertex; i++)
             {
-                if (setMST[i] == false && value[i] <min)
+                if (setMST[i] == false && values[i] < min)
                 {
                     vertex = i;
-                    min = value[i];
+                    min = values[i];
                 }
             }
 
             return vertex;
         }
 
-        
-        // Errors will be solved once graph is constructed
-
-        public S MST(int graph[V][V] , int V)
+        public double MST()
         {
+            double[,] matrix = graph.ConstructedGraph;
+            int V = graph.UniqueColors.Count;
+            
             double minimumSpanningTreeCost = 0.0;
-            int parent[] = new int[V]; // contains MST  
-            List<int> value[V]; // = infinity will be used for relaxation
-            List<bool> setMST[V]; // = false this function will let us know which node is visted
+            int[] parent = new int[V]; // contains MST
 
-            //Assuming starting point is node-zero
+            List<double> values = new List<double>(V); // = infinity will be used for relaxation
+            List<bool> setMST = new List<bool>(V); // = false this function will let us know which node is visted
 
-            // as first node has no parent
-            parent[0] = -1; 
-            /*since non all non visited and non relaxed for first time nodes
-             * have value = infinity we must make souce node = 0 as we choose smallest node*/
-            value[0] = 0;
+            /*
+             * Assuming starting point is node-zero
+             * as first node has no parent
+             */
+
+            parent[0] = -1;
+
+            /* 
+             * since non all non visited and non relaxed for first time nodes
+             * have value = infinity we must make souce node = 0 as we choose smallest node
+             */
+
+            values[0] = 0;
+
             for (int i = 0; i < V - 1; i++)
             {
-                int u = selectMinimumVertex(value, setMST, V); //step1
+                int u = selectMinimumVertex(values, setMST, V); //step1
                 setMST[u] = true; // step2
 
                 for (int j = 0; j < V; j++)
                 {
-                    if (graph[u][j] != 0 && setMST[j] = false && graph[u][j] <value[j])
+                    if (matrix[u, j] != 0 && setMST[j] == false && matrix[u, j] < values[j])
                     {
-                        value[j] = graph[u][j];
+                        values[j] = matrix[u, j];
                         parent[j] = u;
-                        
-
                     }
-
                 }
-                
             }
-            return minimumSpanningTreeCost; // loop on value list;
 
+            foreach (double val in values)
+                minimumSpanningTreeCost += val;
+
+            return minimumSpanningTreeCost;
         }
-
-     }
+    }
 }

@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Cluster.cs" />
+    <Compile Include="Graph.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
