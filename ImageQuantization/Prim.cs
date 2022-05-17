@@ -42,8 +42,8 @@ namespace ImageQuantization
 
         public double MST()
         {
-            double[,] matrix = graph.ConstructedGraph;
-            int V = graph.UniqueColors.Count;
+            //double[,] matrix = graph.ConstructedGraph;
+            int V = graph.disCOlors;
 
             Console.WriteLine(V);
             
@@ -83,9 +83,10 @@ namespace ImageQuantization
 
                 for (int j = 0; j < V; j++)
                 {
-                    if (matrix[u, j] != 0 && setMST[j] == false && matrix[u, j] < values[j])
+                    double dis = ImageOperations.CalculateEuclideanDistance(graph.ColorsMap[u], graph.ColorsMap[j]);
+                    if (dis != 0 && setMST[j] == false && dis < values[j])
                     {
-                        values[j] = matrix[u, j];
+                        values[j] = dis;
                         parent[j] = u;
                     }
                 }

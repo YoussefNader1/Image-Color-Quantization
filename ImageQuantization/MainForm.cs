@@ -43,7 +43,7 @@ namespace ImageQuantization
             Graph g = new Graph(ImageMatrix);
             Prim p = new Prim(g);
             Console.WriteLine(p.MST());
-            
+
         }
 
         private void panel2_Paint(object sender, PaintEventArgs e)
