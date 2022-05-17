@@ -23,7 +23,7 @@ namespace ImageQuantization
          *  - Relax adjecent edges tothe selected node
          */
 
-        private int selectMinimumVertex(List<double> values, List<bool> setMST, int numberOfVertex)
+        private int selectMinimumVertex(double[] values, bool[] setMST, int numberOfVertex)
         {
             double min = double.MaxValue;
             int vertex = 0;
@@ -44,12 +44,23 @@ namespace ImageQuantization
         {
             double[,] matrix = graph.ConstructedGraph;
             int V = graph.UniqueColors.Count;
+
+            Console.WriteLine(V);
             
             double minimumSpanningTreeCost = 0.0;
             int[] parent = new int[V]; // contains MST
 
-            List<double> values = new List<double>(V); // = infinity will be used for relaxation
-            List<bool> setMST = new List<bool>(V); // = false this function will let us know which node is visted
+            double[] values = new double[V]; // = infinity will be used for relaxation
+            bool[] setMST = new bool[V]; // = false this function will let us know which node is visted
+
+
+            // Looping to set default values
+            
+            for (int i = 0; i < V; i++)
+            {
+                values[i] = double.MaxValue;
+                setMST[i] = false;
+            }
 
             /*
              * Assuming starting point is node-zero

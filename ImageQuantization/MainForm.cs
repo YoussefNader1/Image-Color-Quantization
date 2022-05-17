@@ -33,10 +33,17 @@ namespace ImageQuantization
 
         private void btnGaussSmooth_Click(object sender, EventArgs e)
         {
+            /*
             double sigma = double.Parse(txtGaussSigma.Text);
             int maskSize = (int)nudMaskSize.Value ;
             ImageMatrix = ImageOperations.GaussianFilter1D(ImageMatrix, maskSize, sigma);
             ImageOperations.DisplayImage(ImageMatrix, pictureBox2);
+            */
+
+            Graph g = new Graph(ImageMatrix);
+            Prim p = new Prim(g);
+            Console.WriteLine(p.MST());
+            
         }
 
         private void panel2_Paint(object sender, PaintEventArgs e)

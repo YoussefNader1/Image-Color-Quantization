@@ -7,7 +7,9 @@ namespace ImageQuantization
 {
     class Cluster
     {
-
+        public Cluster()
+        {
+        }
 
         public void getClusters(List<KeyValuePair<KeyValuePair<int, int>, double>> edges) { }
 
