@@ -30,7 +30,6 @@ namespace ImageQuantization
         {
             double min = double.MaxValue;
             int vertex = 0;
-
             for (int i = 0; i < numberOfVertex; i++)
             {
                 if (setMST[i] == false && values[i] < min)
@@ -39,23 +38,16 @@ namespace ImageQuantization
                     min = values[i];
                 }
             }
-
             return vertex;
         }
 
         public double MST()
         {
-            //double[,] matrix = graph.ConstructedGraph;
-            int V = graph.disCOlors;
-
-            Console.WriteLine(V);
-            
+            int V = graph.distinctCOlors;
             double minimumSpanningTreeCost = 0.0;
             parent = new int[V]; // contains MST
-
             values = new double[V]; // = infinity will be used for relaxation
             bool[] setMST = new bool[V]; // = false this function will let us know which node is visted
-
 
             // Looping to set default values
             

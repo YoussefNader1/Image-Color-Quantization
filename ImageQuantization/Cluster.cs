@@ -33,12 +33,6 @@ namespace ImageQuantization
             {
                 Console.WriteLine(item);
             }
-
-            //for (int i = 0; i < numberOfClusters - 1; i++)
-            //{
-
-            //}
-
         }
 
     }
