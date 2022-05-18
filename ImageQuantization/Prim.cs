@@ -9,6 +9,9 @@ namespace ImageQuantization
     class Prim
     {
         private readonly Graph graph;
+        public int[] parent; // contains MST
+
+        public double[] values; // = infinity will be used for relaxation
 
         public Prim(Graph graph)
         {
@@ -48,9 +51,9 @@ namespace ImageQuantization
             Console.WriteLine(V);
             
             double minimumSpanningTreeCost = 0.0;
-            int[] parent = new int[V]; // contains MST
+            parent = new int[V]; // contains MST
 
-            double[] values = new double[V]; // = infinity will be used for relaxation
+            values = new double[V]; // = infinity will be used for relaxation
             bool[] setMST = new bool[V]; // = false this function will let us know which node is visted
 
 

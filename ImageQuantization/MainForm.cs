@@ -43,6 +43,11 @@ namespace ImageQuantization
             Graph g = new Graph(ImageMatrix);
             Prim p = new Prim(g);
             Console.WriteLine(p.MST());
+            int K = int.Parse(textBox1.Text);
+            Console.WriteLine(K);
+            Cluster c = new Cluster(p,K);
+            c.getClusters();
+
 
         }
 
