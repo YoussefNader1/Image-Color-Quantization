@@ -17,6 +17,13 @@ namespace ImageQuantization
     public struct RGBPixel
     {
         public byte red, green, blue;
+
+        public RGBPixel(byte red, byte green, byte blue)
+        {
+            this.red = red;
+            this.green = green;
+            this.blue = blue;
+        }
     }
     public struct RGBPixelD
     {

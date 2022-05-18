@@ -29,24 +29,51 @@ namespace ImageQuantization
             }
             txtWidth.Text = ImageOperations.GetWidth(ImageMatrix).ToString();
             txtHeight.Text = ImageOperations.GetHeight(ImageMatrix).ToString();
+            
         }
 
-        private void btnGaussSmooth_Click(object sender, EventArgs e)
+        private void btnQuantizedImage_Click(object sender, EventArgs e)
         {
+            // OUR CODE ------------------------------------------------------
+
+            // Getting desired number of clusters
+            int K = int.Parse(textBox1.Text);
+
+            // Starting the quantization process
 
             Graph g = new Graph(ImageMatrix);
-            Console.WriteLine(g.distinctCOlors);
+            Console.WriteLine(g.distinctColors);
+
             Prim p = new Prim(g);
             Console.WriteLine(p.MST());
-            int K = int.Parse(textBox1.Text);
-            Console.WriteLine(K);
-            Cluster c = new Cluster(p,K);
-            c.getClusters();
+
+            Cluster c = new Cluster(p, g, K);
+            Dictionary<RGBPixel, RGBPixel> mappedPallete = c.GeneratePallete();
+
+            int h = ImageOperations.GetHeight(ImageMatrix), w = ImageOperations.GetWidth(ImageMatrix);
+
+            RGBPixel[,] quantizedImage = new RGBPixel[h, w];
 
 
+            for (int i = 0; i < h; i++)
+                for (int j = 0; j < w; j++)
+                    quantizedImage[i, j] = mappedPallete[ImageMatrix[i, j]];
+
+
+            ImageOperations.DisplayImage(quantizedImage, pictureBox2);
         }
 
         private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label7_Click(object sender, EventArgs e)
         {
 
         }

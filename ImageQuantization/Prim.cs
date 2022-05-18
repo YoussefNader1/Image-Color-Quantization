@@ -43,7 +43,7 @@ namespace ImageQuantization
 
         public double MST()
         {
-            int V = graph.distinctCOlors;
+            int V = graph.distinctColors;
             double minimumSpanningTreeCost = 0.0;
             parent = new int[V]; // contains MST
             values = new double[V]; // = infinity will be used for relaxation
@@ -78,7 +78,7 @@ namespace ImageQuantization
 
                 for (int j = 0; j < V; j++)
                 {
-                    double dis = ImageOperations.CalculateEuclideanDistance(graph.ColorsMap[u], graph.ColorsMap[j]);
+                    double dis = ImageOperations.CalculateEuclideanDistance(graph.UniqueColors[u], graph.UniqueColors[j]);
                     if (dis != 0 && setMST[j] == false && dis < values[j])
                     {
                         values[j] = dis;
