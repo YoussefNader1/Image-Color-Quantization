@@ -8,14 +8,16 @@ namespace ImageQuantization
 {
     class Prim
     {
-        private readonly Graph graph;
-        public int[] parent; // contains MST
-
-        public double[] values; // = infinity will be used for relaxation
+        private readonly Graph graph;               //O(1)
+        // contains MST 
+        public int[] parent;               //O(1)     
+        
+        // = infinity will be used for relaxation 
+        public double[] values;               //O(1)
 
         public Prim(Graph graph)
         {
-            this.graph = graph;
+            this.graph = graph;               //O(1)
         }
 
         /*
@@ -26,35 +28,38 @@ namespace ImageQuantization
          *  - Relax adjecent edges tothe selected node
          */
 
-        private int selectMinimumVertex(double[] values, bool[] setMST, int numberOfVertex)
+        private int selectMinimumVertex(double[] values, bool[] setMST, int numberOfVertex) //O(V)
         {
-            double min = double.MaxValue;
-            int vertex = 0;
-            for (int i = 0; i < numberOfVertex; i++)
+            double min = double.MaxValue;           //O(1)
+            int vertex = 0;                         //O(1)
+            for (int i = 0; i < numberOfVertex; i++)// Complexity = O(body) x #iteration = O(1) x V = O(V)
             {
-                if (setMST[i] == false && values[i] < min)
+                if (setMST[i] == false && values[i] < min)// Compexity = O(max body) + O(condition) = O(1) x O(1) = O(1)
                 {
-                    vertex = i;
-                    min = values[i];
+                    vertex = i;                     //O(1)
+                    min = values[i];                //O(1)
                 }
             }
-            return vertex;
+            return vertex;               //O(1)
         }
 
         public double MST()
         {
-            int V = graph.distinctColors;
-            double minimumSpanningTreeCost = 0.0;
-            parent = new int[V]; // contains MST
-            values = new double[V]; // = infinity will be used for relaxation
-            bool[] setMST = new bool[V]; // = false this function will let us know which node is visted
+            int V = graph.distinctColors;               //O(1)
+            double minimumSpanningTreeCost = 0.0;       //O(1)
+            // contains MST
+            parent = new int[V];                        //O(1)
+            // = infinity will be used for relaxation
+            values = new double[V];                     //O(1)
+            // = false this function will let us know which node is visted
+            bool[] setMST = new bool[V];                //O(1)
 
             // Looping to set default values
-            
-            for (int i = 0; i < V; i++)
+
+            for (int i = 0; i < V; i++)                 //O(V)
             {
-                values[i] = double.MaxValue;
-                setMST[i] = false;
+                values[i] = double.MaxValue;            //O(1)
+                setMST[i] = false;                      //O(1)
             }
 
             /*
@@ -71,26 +76,27 @@ namespace ImageQuantization
 
             values[0] = 0;
 
-            for (int i = 0; i < V - 1; i++)
+            for (int i = 0; i < V - 1; i++) // Complexity = O(body) x #iteration = O(V) x V  = O(V^2)
             {
-                int u = selectMinimumVertex(values, setMST, V); //step1
+                //step1
+                int u = selectMinimumVertex(values, setMST, V); //O(V)
                 setMST[u] = true; // step2
 
-                for (int j = 0; j < V; j++)
+                for (int j = 0; j < V; j++) // Complexity = O(body) x #iteration = O(1) x V  = O(V)
                 {
-                    double dis = ImageOperations.CalculateEuclideanDistance(graph.UniqueColors[u], graph.UniqueColors[j]);
-                    if (dis != 0 && setMST[j] == false && dis < values[j])
+                    double dis = ImageOperations.CalculateEuclideanDistance(graph.UniqueColors[u], graph.UniqueColors[j]); //O(1)
+                    if (dis != 0 && setMST[j] == false && dis < values[j]) // Compexity = O(max body) + O(condition) = O(1) x O(1) = O(1)
                     {
-                        values[j] = dis;
-                        parent[j] = u;
+                        values[j] = dis;                //O(1)
+                        parent[j] = u;                  //O(1)
                     }
                 }
             }
 
-            foreach (double val in values)
-                minimumSpanningTreeCost += val;
+            foreach (double val in values) // Complexity = O(body) x #iteration = O(1) x V = O(V)
+                minimumSpanningTreeCost += val;         //O(1)
 
-            return minimumSpanningTreeCost;
+            return minimumSpanningTreeCost;             //O(1)
         }
     }
 }

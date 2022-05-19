@@ -17,7 +17,7 @@ namespace ImageQuantization
             numberOfClusters = K;
         }
 
-        public Dictionary<RGBPixel, RGBPixel> GeneratePallete()
+        private RGBPixel[,,] GeneratePallete()
         {
             int[] parent = prim.parent;
             double[] values = prim.values;
@@ -67,6 +67,8 @@ namespace ImageQuantization
             bool[] visitedColors = new bool[graph.distinctColors];
             Queue<int> colors = new Queue<int>();
 
+            RGBPixel[,,] map = new RGBPixel[260, 260, 260];
+
             Dictionary<RGBPixel, RGBPixel> mappedPallete = new Dictionary<RGBPixel, RGBPixel>();
 
             for (int i = 0; i < graph.distinctColors; i++)
@@ -101,19 +103,35 @@ namespace ImageQuantization
                     clusterGreenTotal /= cluster.Count;
                     clusterBlueTotal /= cluster.Count;
 
-                    foreach (int color in cluster) 
+                    foreach (int color in cluster)
                     {
                         RGBPixel newColor = new RGBPixel((byte)(clusterRedTotal),
                                                         (byte)(clusterGreenTotal),
                                                         (byte)(clusterBlueTotal));
 
-                        mappedPallete[graph.UniqueColors[color]] = newColor;
+                        map[graph.UniqueColors[color].red,
+                            graph.UniqueColors[color].green,
+                            graph.UniqueColors[color].blue] = newColor;
                     }
                 }
             }
-
-            return mappedPallete;
+            return map;
         }
+
+
+        public RGBPixel[,] GetQuantizedImage()
+        {
+            RGBPixel[,,] map = GeneratePallete();
+            int h = ImageOperations.GetHeight(graph.ImageMatrix), w = ImageOperations.GetWidth(graph.ImageMatrix);
+            for (int i = 0; i < h; i++)
+                for (int j = 0; j < w; j++)
+                    graph.ImageMatrix[i, j] = map[graph.ImageMatrix[i, j].red,
+                        graph.ImageMatrix[i, j].green,
+                        graph.ImageMatrix[i, j].blue];
+
+            return graph.ImageMatrix;
+        }
+
 
     }
 }

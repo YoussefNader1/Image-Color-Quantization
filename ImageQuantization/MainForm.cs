@@ -34,9 +34,9 @@ namespace ImageQuantization
 
         private void btnQuantizedImage_Click(object sender, EventArgs e)
         {
-            // OUR CODE ------------------------------------------------------
+            //OUR CODE ------------------------------------------------------
 
-            // Getting desired number of clusters
+            //Getting desired number of clusters
             int K = int.Parse(textBox1.Text);
 
             // Starting the quantization process
@@ -48,19 +48,9 @@ namespace ImageQuantization
             Console.WriteLine(p.MST());
 
             Cluster c = new Cluster(p, g, K);
-            Dictionary<RGBPixel, RGBPixel> mappedPallete = c.GeneratePallete();
+            ImageMatrix = c.GetQuantizedImage();
 
-            int h = ImageOperations.GetHeight(ImageMatrix), w = ImageOperations.GetWidth(ImageMatrix);
-
-            RGBPixel[,] quantizedImage = new RGBPixel[h, w];
-
-
-            for (int i = 0; i < h; i++)
-                for (int j = 0; j < w; j++)
-                    quantizedImage[i, j] = mappedPallete[ImageMatrix[i, j]];
-
-
-            ImageOperations.DisplayImage(quantizedImage, pictureBox2);
+            ImageOperations.DisplayImage(ImageMatrix, pictureBox2);
         }
 
         private void panel2_Paint(object sender, PaintEventArgs e)

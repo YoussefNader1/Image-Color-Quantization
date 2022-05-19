@@ -43,13 +43,13 @@ namespace ImageQuantization
     public class ImageOperations
     {
         //Function to calculate distance between points using euclidean rule 
-        public static double CalculateEuclideanDistance(RGBPixel x, RGBPixel y)
+        public static double CalculateEuclideanDistance(RGBPixel x, RGBPixel y)          //O(1)
         {
-            double distance = 0.0;
-            distance += Math.Abs(x.red - y.red) * Math.Abs(x.red - y.red);
-            distance += Math.Abs(x.green - y.green) * Math.Abs(x.green - y.green);
-            distance += Math.Abs(x.blue - y.blue) * Math.Abs(x.blue - y.blue);
-            return Math.Sqrt(distance);
+            double distance = 0.0;                                                       //O(1)
+            distance += Math.Abs(x.red - y.red) * Math.Abs(x.red - y.red);               //O(1)
+            distance += Math.Abs(x.green - y.green) * Math.Abs(x.green - y.green);       //O(1)
+            distance += Math.Abs(x.blue - y.blue) * Math.Abs(x.blue - y.blue);           //O(1)
+            return Math.Sqrt(distance);                                                  //O(1)
         }
         /// <summary>
         /// Open an image and load it into 2D array of colors (size: Height x Width)
