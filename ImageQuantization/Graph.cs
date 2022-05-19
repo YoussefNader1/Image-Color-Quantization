@@ -15,15 +15,15 @@ namespace ImageQuantization
             GetUniqueColors();                                         //O(1)
         }
         
-        private void GetUniqueColors() // Function overall compexity = O(V^2)
+        private void GetUniqueColors() // Function overall compexity = O(N^2)
         {
             UniqueColors = new RGBPixel[6000000];                         //O(1)
             bool[,,] visited = new bool[260, 260, 260];                   //O(1)
             int rows = ImageMatrix.GetLength(0);                          //O(1)
             int columns = ImageMatrix.GetLength(1);                       //O(1)
-            for (int i = 0; i < rows; i++) // Complexity = O(body) x #iteration = O(columns) x rows = O(V^2)
+            for (int i = 0; i < rows; i++) // Complexity = O(body) x #iteration = O(columns) x rows = O(N^2)
             {
-                for (int j = 0; j < columns; j++) // Complexity = O(body) x #iteration = O(1) x columns = O(columns) = O(V)
+                for (int j = 0; j < columns; j++) // Complexity = O(body) x #iteration = O(1) x columns = O(columns) = O(N)
                 {
                     int red = ImageMatrix[i, j].red;                       //O(1)
                     int green = ImageMatrix[i, j].green;                   //O(1)

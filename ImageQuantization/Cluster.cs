@@ -28,12 +28,15 @@ namespace ImageQuantization
              * as for now the graph is disconnected after being fully connected.
              */
 
-            for (int i = 0; i < removedVertices; i++) // Complexity = O(body) x #iteration = O(graph.distinctColors) x removedVertices = O(removedVertices x graph.distinctColors)
+            for (int i = 0; i < removedVertices; i++) // Complexity = O(body) x #iteration = O(D) x removedVertices
+                                                      // = O(D) x K - 1 = O(D x K) 
             {
                 double maxValue = 0;                           //O(1)
                 int removedColor = -1;                         //O(1)
 
-                for (int j = 0; j < graph.distinctColors; j++) // Complexity = O(body) x #iteration = O(1) x graph.distinctColors = O(graph.distinctColors)
+                for (int j = 0; j < graph.distinctColors; j++) // Complexity = O(body) x #iteration =
+                                                               // O(1) x graph.distinctColors = O(graph.distinctColors)
+                                                               // = O(1) x D = O(D)
                 {
                     if (values[j] > maxValue)                  //O(1)
                     {
@@ -49,32 +52,35 @@ namespace ImageQuantization
 
             Dictionary<int, List<int>> adjacencyList = new Dictionary<int, List<int>>();                  //O(1)
 
-            for (int i = 0; i < graph.distinctColors; i++) // Complexity = O(body) x #iteration = O() x  = O( x )
+            for (int i = 0; i < graph.distinctColors; i++) // Complexity = O(body) x #iteration = O(n) x V = O( x )
             {
                 if (!adjacencyList.ContainsKey(i))                                          // O(1)
-                    adjacencyList.Add(i, new List<int>());                                  // O(n)
+                    adjacencyList.Add(i, new List<int>());                                  /* O(n) n -> refers to size of the list
+                                                                                            // as when adding new item to list we must iterate on it and
+                                                                                            // copy it in a new one so it depends on lsit size
+                                                                                            */
 
                 if (parent[i] != -1 && !adjacencyList.ContainsKey(parent[i])) // O(1) + O(1) = O(1)
-                    adjacencyList.Add(parent[i], new List<int>());                          // O(n)
+                    adjacencyList.Add(parent[i], new List<int>()); // O(n)
 
-                if (parent[i] != -1)                                                        // O(1)
+                if (parent[i] != -1)                                // O(1)
                 {
-                    adjacencyList[parent[i]].Add(i);                                        // O(n)
-                    adjacencyList[i].Add(parent[i]);                                        // O(n)
+                    adjacencyList[parent[i]].Add(i);                // O(n)
+                    adjacencyList[i].Add(parent[i]);                // O(n)
                 }
             }
 
             bool[] visitedColors = new bool[graph.distinctColors];                //O(1)
-            Queue<int> colors = new Queue<int>();                                 //O(1)
+            Queue<int> colors = new Queue<int>();              //O(1)
 
-            RGBPixel[,,] map = new RGBPixel[260, 260, 260];                       //O(1)
+            RGBPixel[,,] map = new RGBPixel[260, 260, 260];   //O(1)
 
             for (int i = 0; i < graph.distinctColors; i++)
             {
                 if (!visitedColors[i])                       //O(1)
                 {
                     colors.Enqueue(i);                       //O(n)
-                    List<int> cluster = new List<int>();                       //O(1)
+                    List<int> cluster = new List<int>();            //O(1)
 
                     long clusterRedTotal = 0, clusterGreenTotal = 0, clusterBlueTotal = 0; //O(1)
 
@@ -92,33 +98,33 @@ namespace ImageQuantization
                                 colors.Enqueue(child);
                         }
 
-                        clusterRedTotal += graph.UniqueColors[currentColor].red;              //O(1)
-                        clusterGreenTotal += graph.UniqueColors[currentColor].green;              //O(1)
+                        clusterRedTotal += graph.UniqueColors[currentColor].red;                //O(1)
+                        clusterGreenTotal += graph.UniqueColors[currentColor].green;            //O(1)
                         clusterBlueTotal += graph.UniqueColors[currentColor].blue;              //O(1)
                     }
 
-                    clusterRedTotal /= cluster.Count;              //O(1)
+                    clusterRedTotal /= cluster.Count;                //O(1)
                     clusterGreenTotal /= cluster.Count;              //O(1)
-                    clusterBlueTotal /= cluster.Count;              //O(1)
+                    clusterBlueTotal /= cluster.Count;               //O(1)
 
                     foreach (int color in cluster)
                     {
                         RGBPixel newColor = new RGBPixel((byte)(clusterRedTotal),
                                                         (byte)(clusterGreenTotal),
-                                                        (byte)(clusterBlueTotal));              //O(1)
+                                                        (byte)(clusterBlueTotal));    //O(1)
 
                         map[graph.UniqueColors[color].red,
                             graph.UniqueColors[color].green,
-                            graph.UniqueColors[color].blue] = newColor;              //O(1)
+                            graph.UniqueColors[color].blue] = newColor;               //O(1)
                     }
                 }
             }
 
-            return map;              //O(1)
+            return map;   //O(1)
         }
 
 
-        public RGBPixel[,] GetQuantizedImage()
+        public RGBPixel[,] GetQuantizedImage() // O(N^2)
         {
             RGBPixel[,,] map = GeneratePallete();
             int h = ImageOperations.GetHeight(graph.ImageMatrix),
