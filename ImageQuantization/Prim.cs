@@ -76,7 +76,7 @@ namespace ImageQuantization
 
             values[0] = 0;
 
-            for (int i = 0; i < V - 1; i++) // Complexity = O(body) x #iteration = O(V) x V  = O(V^2)
+            for (int i = 0; i < V - 1; i++) // Complexity = O(body) x #iteration = O(V) x V - 1 (E)  = O(V^2)
             {
                 //step1
                 int u = selectMinimumVertex(values, setMST, V); //O(V)

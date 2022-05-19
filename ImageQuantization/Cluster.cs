@@ -7,21 +7,21 @@ namespace ImageQuantization
 {
     class Cluster
     {
-        int numberOfClusters;
-        Graph graph;
-        Prim prim;
+        int numberOfClusters;              //O(1)
+        Graph graph;              //O(1)
+        Prim prim;              //O(1)
         public Cluster(Prim prim, Graph graph, int K)
         {
-            this.prim = prim;
-            this.graph = graph;
-            numberOfClusters = K;
+            this.prim = prim;              //O(1)
+            this.graph = graph;              //O(1)
+            numberOfClusters = K;              //O(1)
         }
 
         private RGBPixel[,,] GeneratePallete()
         {
-            int[] parent = prim.parent;
-            double[] values = prim.values;
-            int removedVertices = numberOfClusters - 1;
+            int[] parent = prim.parent;              //O(1)
+            double[] values = prim.values;              //O(1)
+            int removedVertices = numberOfClusters - 1;              //O(1)
 
             /*
              * Theory is to remove the most expensive edges to create clusters
@@ -30,20 +30,20 @@ namespace ImageQuantization
 
             for (int i = 0; i < removedVertices; i++)
             {
-                double maxValue = 0;
-                int removedColor = -1;
+                double maxValue = 0;              //O(1)
+                int removedColor = -1;              //O(1)
 
                 for (int j = 0; j < graph.distinctColors; j++)
                 {
                     if (values[j] > maxValue)
                     {
-                        maxValue = values[j];
-                        removedColor = j;
+                        maxValue = values[j];              //O(1)
+                        removedColor = j;              //O(1)
                     }
                 }
 
-                parent[removedColor] = -1;
-                values[removedColor] = 0;
+                parent[removedColor] = -1;              //O(1)
+                values[removedColor] = 0;              //O(1)
             }
 
 
@@ -78,7 +78,7 @@ namespace ImageQuantization
                     colors.Enqueue(i);
                     List<int> cluster = new List<int>();
 
-                    long clusterRedTotal = 0, clusterGreenTotal = 0, clusterBlueTotal = 0;
+                    long clusterRedTotal = 0, clusterGreenTotal = 0, clusterBlueTotal = 0; //O(1)
 
                     while (colors.Count != 0)
                     {
@@ -94,28 +94,28 @@ namespace ImageQuantization
                                 colors.Enqueue(child);
                         }
 
-                        clusterRedTotal += graph.UniqueColors[currentColor].red;
-                        clusterGreenTotal += graph.UniqueColors[currentColor].green;
-                        clusterBlueTotal += graph.UniqueColors[currentColor].blue;
+                        clusterRedTotal += graph.UniqueColors[currentColor].red;              //O(1)
+                        clusterGreenTotal += graph.UniqueColors[currentColor].green;              //O(1)
+                        clusterBlueTotal += graph.UniqueColors[currentColor].blue;              //O(1)
                     }
 
-                    clusterRedTotal /= cluster.Count;
-                    clusterGreenTotal /= cluster.Count;
-                    clusterBlueTotal /= cluster.Count;
+                    clusterRedTotal /= cluster.Count;              //O(1)
+                    clusterGreenTotal /= cluster.Count;              //O(1)
+                    clusterBlueTotal /= cluster.Count;              //O(1)
 
                     foreach (int color in cluster)
                     {
                         RGBPixel newColor = new RGBPixel((byte)(clusterRedTotal),
                                                         (byte)(clusterGreenTotal),
-                                                        (byte)(clusterBlueTotal));
+                                                        (byte)(clusterBlueTotal));              //O(1)
 
                         map[graph.UniqueColors[color].red,
                             graph.UniqueColors[color].green,
-                            graph.UniqueColors[color].blue] = newColor;
+                            graph.UniqueColors[color].blue] = newColor;              //O(1)
                     }
                 }
             }
-            return map;
+            return map;              //O(1)
         }
 
 
@@ -123,13 +123,13 @@ namespace ImageQuantization
         {
             RGBPixel[,,] map = GeneratePallete();
             int h = ImageOperations.GetHeight(graph.ImageMatrix), w = ImageOperations.GetWidth(graph.ImageMatrix);
-            for (int i = 0; i < h; i++)
-                for (int j = 0; j < w; j++)
+            for (int i = 0; i < h; i++) // Complexity = O(body) x #iteration = O(N) x h = O(N^2)
+                for (int j = 0; j < w; j++) // Complexity = O(body) x #iteration = O(1) x w = O(w) = O(N)
                     graph.ImageMatrix[i, j] = map[graph.ImageMatrix[i, j].red,
                         graph.ImageMatrix[i, j].green,
-                        graph.ImageMatrix[i, j].blue];
+                        graph.ImageMatrix[i, j].blue];              //O(1)
 
-            return graph.ImageMatrix;
+            return graph.ImageMatrix;              //O(1)
         }
 
 
