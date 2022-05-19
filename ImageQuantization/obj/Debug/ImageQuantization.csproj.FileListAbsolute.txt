@@ -31,15 +31,6 @@ C:\Users\yn653\github_projects\Image-Color-Quantization-\ImageQuantization\obj\D
 C:\Users\yn653\github_projects\Image-Color-Quantization-\ImageQuantization\obj\Debug\ImageQuantization.csproj.CoreCompileInputs.cache
 C:\Users\yn653\github_projects\Image-Color-Quantization-\ImageQuantization\obj\Debug\ImageQuantization.exe
 C:\Users\yn653\github_projects\Image-Color-Quantization-\ImageQuantization\obj\Debug\ImageQuantization.pdb
-D:\Work\Image-Color-Quantization\ImageQuantization\bin\Debug\ImageQuantization.exe
-D:\Work\Image-Color-Quantization\ImageQuantization\bin\Debug\ImageQuantization.pdb
-D:\Work\Image-Color-Quantization\ImageQuantization\obj\Debug\ImageQuantization.csproj.AssemblyReference.cache
-D:\Work\Image-Color-Quantization\ImageQuantization\obj\Debug\ImageQuantization.MainForm.resources
-D:\Work\Image-Color-Quantization\ImageQuantization\obj\Debug\ImageQuantization.Properties.Resources.resources
-D:\Work\Image-Color-Quantization\ImageQuantization\obj\Debug\ImageQuantization.csproj.GenerateResource.cache
-D:\Work\Image-Color-Quantization\ImageQuantization\obj\Debug\ImageQuantization.csproj.CoreCompileInputs.cache
-D:\Work\Image-Color-Quantization\ImageQuantization\obj\Debug\ImageQuantization.exe
-D:\Work\Image-Color-Quantization\ImageQuantization\obj\Debug\ImageQuantization.pdb
 C:\Users\yn653\github_projects\Image-Color-Quantization\ImageQuantization\bin\Debug\ImageQuantization.exe
 C:\Users\yn653\github_projects\Image-Color-Quantization\ImageQuantization\bin\Debug\ImageQuantization.pdb
 C:\Users\yn653\github_projects\Image-Color-Quantization\ImageQuantization\obj\Debug\ImageQuantization.csproj.AssemblyReference.cache
@@ -49,3 +40,11 @@ C:\Users\yn653\github_projects\Image-Color-Quantization\ImageQuantization\obj\De
 C:\Users\yn653\github_projects\Image-Color-Quantization\ImageQuantization\obj\Debug\ImageQuantization.csproj.CoreCompileInputs.cache
 C:\Users\yn653\github_projects\Image-Color-Quantization\ImageQuantization\obj\Debug\ImageQuantization.exe
 C:\Users\yn653\github_projects\Image-Color-Quantization\ImageQuantization\obj\Debug\ImageQuantization.pdb
+D:\Work\Image-Color-Quantization\ImageQuantization\bin\Debug\ImageQuantization.exe
+D:\Work\Image-Color-Quantization\ImageQuantization\bin\Debug\ImageQuantization.pdb
+D:\Work\Image-Color-Quantization\ImageQuantization\obj\Debug\ImageQuantization.MainForm.resources
+D:\Work\Image-Color-Quantization\ImageQuantization\obj\Debug\ImageQuantization.Properties.Resources.resources
+D:\Work\Image-Color-Quantization\ImageQuantization\obj\Debug\ImageQuantization.csproj.GenerateResource.cache
+D:\Work\Image-Color-Quantization\ImageQuantization\obj\Debug\ImageQuantization.csproj.CoreCompileInputs.cache
+D:\Work\Image-Color-Quantization\ImageQuantization\obj\Debug\ImageQuantization.exe
+D:\Work\Image-Color-Quantization\ImageQuantization\obj\Debug\ImageQuantization.pdb
