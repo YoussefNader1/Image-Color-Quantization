@@ -5,6 +5,8 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using System.Diagnostics;
+
 
 namespace ImageQuantization
 {
@@ -41,6 +43,8 @@ namespace ImageQuantization
 
             // Starting the quantization process
 
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
             Graph g = new Graph(ImageMatrix);
             Console.WriteLine(g.distinctColors);
 
@@ -49,10 +53,17 @@ namespace ImageQuantization
 
             Cluster c = new Cluster(p, g, K);
             ImageMatrix = c.GetQuantizedImage();
+            stopwatch.Stop();
+            
 
             ImageOperations.DisplayImage(ImageMatrix, pictureBox2);
+            MainForm.ShowTime(stopwatch.ElapsedMilliseconds / 1000.0);
         }
 
+        public static void ShowTime(double time)
+        {
+            MessageBox.Show("Elapsed Time is { " + time.ToString() + " } in seconds");
+        }
         private void panel2_Paint(object sender, PaintEventArgs e)
         {
 
