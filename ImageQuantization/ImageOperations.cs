@@ -29,12 +29,7 @@ namespace ImageQuantization
     {
         public double red, green, blue;
     }
-    struct Edge
-    {
-        public int from, to;
-        public double weight;
 
-    };
 
 
     /// <summary>

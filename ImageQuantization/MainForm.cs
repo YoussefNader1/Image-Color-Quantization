@@ -50,19 +50,23 @@ namespace ImageQuantization
 
             Prim p = new Prim(g);
             Console.WriteLine(p.MST());
-
+            
             Cluster c = new Cluster(p, g, K);
             ImageMatrix = c.GetQuantizedImage();
             stopwatch.Stop();
             
-
             ImageOperations.DisplayImage(ImageMatrix, pictureBox2);
-            MainForm.ShowTime(stopwatch.ElapsedMilliseconds / 1000.0);
+            txtColor.Text = g.distinctColors.ToString();
+            textBox2.Text = p.MST().ToString();
+
+            ShowTime(stopwatch.ElapsedMilliseconds);
         }
 
         public static void ShowTime(double time)
         {
-            MessageBox.Show("Elapsed Time is { " + time.ToString() + " } in seconds");
+            double ms = time;
+            double s = time /1000;
+            MessageBox.Show("Elapsed Time is { " + ms.ToString() + " } in MiliSecond and { " + s.ToString() + " } in Seconds" );
         }
         private void panel2_Paint(object sender, PaintEventArgs e)
         {
@@ -75,6 +79,11 @@ namespace ImageQuantization
         }
 
         private void label7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
         {
 
         }
