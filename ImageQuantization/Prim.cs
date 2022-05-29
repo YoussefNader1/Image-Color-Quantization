@@ -43,7 +43,7 @@ namespace ImageQuantization
             return vertex;               //O(1)
         }
 
-        public double MST()
+        public double MST()                             //O(D^2)
         {
             int D = graph.distinctColors;               //O(1)
             double minimumSpanningTreeCost = 0.0;       //O(1)
@@ -74,7 +74,7 @@ namespace ImageQuantization
              */
             values[0] = 0;            //O(1)
 
-            for (int i = 0; i < D - 1; i++) // Complexity = O(body) x #iteration = O(D) x D - 1 (E)  = O(E x D)
+            for (int i = 0; i < D - 1; i++) // Complexity = O(body) x #iteration = O(D) x D - 1 (E)  = O(E x D) = O(D^2)
             {
                 //step1
                 int u = SelectMinimumVertex(values, setMST, D); //O(D)

@@ -52,7 +52,7 @@ namespace ImageQuantization
 
             Dictionary<int, List<int>> adjacencyList = new Dictionary<int, List<int>>();                  //O(1)
 
-            for (int i = 0; i < graph.distinctColors; i++) // Complexity = O(body) x #iteration = O(n) x V = O( x )
+            for (int i = 0; i < graph.distinctColors; i++) // Complexity = O(body) x #iteration = O(n) x D = O( N x D)
             {
                 if (!adjacencyList.ContainsKey(i))                                          // O(1)
                     adjacencyList.Add(i, new List<int>());                                  /* O(n) n -> refers to size of the list

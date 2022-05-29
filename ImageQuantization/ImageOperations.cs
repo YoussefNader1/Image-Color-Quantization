@@ -30,8 +30,6 @@ namespace ImageQuantization
         public double red, green, blue;
     }
 
-
-
     /// <summary>
     /// Library of static functions that deal with images
     /// </summary>

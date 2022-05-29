@@ -56,8 +56,8 @@ namespace ImageQuantization
             stopwatch.Stop();
             
             ImageOperations.DisplayImage(ImageMatrix, pictureBox2);
-            txtColor.Text = g.distinctColors.ToString();
-            textBox2.Text = p.MST().ToString();
+            //txtColor.Text = g.distinctColors.ToString();
+            //textBox2.Text = p.MST().ToString();
 
             ShowTime(stopwatch.ElapsedMilliseconds);
         }
